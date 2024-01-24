@@ -51,6 +51,10 @@ class Staff extends Authenticatable
         return $this->belongsToMany(Company::class);
     }
 
+    public function warehouse(){
+        return $this->hasOne(Warehouse::class);
+    }
+
     // public function appliedCompany() { 
     //     return $this->belongsTo(Company::class, 'staff_id', 'id', 'staff_company');
     // }
@@ -64,6 +68,7 @@ class Staff extends Authenticatable
     // public function stock() {
     //     return $this->hasMany(Stock::class);
     // }
+
     public function orders() {
         return $this->hasMany(Order::class);
     }

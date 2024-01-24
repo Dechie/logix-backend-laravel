@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Staff;
 
 class StaffController extends Controller
 {
     //
+    public function index(Request $request) {
+        $id = $request->company;
+        $company = Company::find($id);
+        $sts = $company->staff;
+
+        return response()->json($sts);
+    }
      public function register(Request $request)
     {
         $user = $this->validate($request, [

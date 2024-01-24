@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Warehouse;
 
 class AdminDashboardController extends Controller
 {
@@ -67,4 +69,14 @@ class AdminDashboardController extends Controller
          //   ->header('Content-Type', 'application/json');
          return response()->json($companies, 200);
     }
+
+     public function searchCompany(Request $request) {
+        $id = $request->company;
+
+        $company = Company::find($id);
+
+        return $company ?? null;
+    }
+
+    
 }

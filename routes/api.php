@@ -27,21 +27,23 @@ Route::post('/create', [AdminDashboardController::class, 'store']);
 
 Route::get('/home', [AdminDashboardController::class, 'getCompanies']);
 Route::get('/{company}', [AdminDashboardController::class, 'index']);
+Route::get('/companies/{company}', [AdminDashboardController::class, 'searchCompany']);
 
 
 
 Route::prefix('admin')
     ->group(function () {
 
-        Route::post('/register', [AdminDashboardController::class, 'register']);
         Route::middleware('auth:sanctum')->group(function () {
+            //Route::post('/{company}/staffToWarehouse', [AdminDashboardController::class, 'applyStaffToWarehouse']);
         });
+        Route::post('/register', [AdminController::class, 'register']);
     });
 
 Route::prefix('staff')->group(function(){
     Route::middleware('auth:sanctum')->group(function(){
 
-        Route::post('/applyStaff', [StaffDashboardController::class, 'applyToCompany']);
+        Route::post('/{staff}/applyStaff', [StaffDashboardController::class, 'applyToCompany']);
 
         Route::get('/login', [StaffController::class,'login'])->name('login');
 
@@ -52,9 +54,9 @@ Route::prefix('staff')->group(function(){
 Route::prefix('driver')
     ->group(function(){
 
-    Route::post('/register', [DriverController::class, 'register']);
     Route::middleware('auth:sanctum')->group(function(){
 
         Route::get('/login', [DriverController::class,'login'])->name('login');
     });
+    Route::post('/register', [DriverController::class, 'register']);
 });

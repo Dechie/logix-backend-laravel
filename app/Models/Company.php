@@ -15,6 +15,10 @@ class Company extends Model
         'location'
     ];
 
+    public function staff() {
+        return $this->belongsToMany(Staff::class);
+    }
+
     public function projects() {
         return $this->hasMany(Project::class);
     }
